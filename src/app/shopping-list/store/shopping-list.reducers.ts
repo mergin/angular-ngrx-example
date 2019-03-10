@@ -8,7 +8,7 @@ export interface AppState {
 
 export interface State {
     ingredients: Ingredient[];
-    editedIngredient: Ingredient[];
+    editedIngredient: Ingredient;
     editedIngredientIndex: number;
 }
 
@@ -41,7 +41,7 @@ export function shoppingListReducer(state = initialState, action: ShoppingListAc
             // we do this to not overwrite the existing state
 
             // create new object for updated igredient
-            const ingredient = state.ingredients[action.payload.index];
+            const ingredient = state.ingredients[state.editedIngredientIndex];
             const updatedIngredient = {
                 ...ingredient,
                 ...action.payload.ingredient
@@ -49,7 +49,7 @@ export function shoppingListReducer(state = initialState, action: ShoppingListAc
 
             // create new list of ingredients and update the ingredient there
             const ingredients = [...state.ingredients];
-            ingredients[action.payload.index] = updatedIngredient;
+            ingredients[state.editedIngredientIndex] = updatedIngredient;
 
             return {
                 ...state,
@@ -60,11 +60,22 @@ export function shoppingListReducer(state = initialState, action: ShoppingListAc
 
             // create new list of ingredients and update the ingredient there
             const oldIngredients = [...state.ingredients];
-            oldIngredients.splice(action.payload, 1);
+            oldIngredients.splice(state.editedIngredientIndex, 1);
 
             return {
                 ...state,
                 ingredients: oldIngredients
+            };
+
+        case ShoppingListActions.START_EDIT:
+
+            // create new list of ingredients and update the ingredient there
+            const editedIngredient = { ...state.ingredients[action.payload] };
+
+            return {
+                ...state,
+                editedIngredient: editedIngredient,
+                editedIngredientIndex: action.payload
             };
 
         default:
