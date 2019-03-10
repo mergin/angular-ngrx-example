@@ -24,18 +24,22 @@ const initialState: State = {
 export function shoppingListReducer(state = initialState, action: ShoppingListActions.ShoppingListActions) {
 
     switch (action.type) {
+
+        // add ingredient
         case ShoppingListActions.ADD_INGREDIENT:
             return {
                 ...state,
                 ingredients: [...state.ingredients, action.payload]
             };
 
+        // add ingredients
         case ShoppingListActions.ADD_INGREDIENTS:
             return {
                 ...state,
                 ingredients: [...state.ingredients, ...action.payload]
             };
 
+        // update ingredient
         case ShoppingListActions.UPDATE_INGREDIENT:
 
             // we do this to not overwrite the existing state
@@ -44,7 +48,7 @@ export function shoppingListReducer(state = initialState, action: ShoppingListAc
             const ingredient = state.ingredients[state.editedIngredientIndex];
             const updatedIngredient = {
                 ...ingredient,
-                ...action.payload.ingredient
+                ...action.payload
             };
 
             // create new list of ingredients and update the ingredient there
@@ -53,9 +57,12 @@ export function shoppingListReducer(state = initialState, action: ShoppingListAc
 
             return {
                 ...state,
-                ingredients: ingredients
+                ingredients: ingredients,
+                editedIngredient: null,
+                editedIngredientIndex: -1
             };
 
+        // delete ingredient
         case ShoppingListActions.DELETE_INGREDIENT:
 
             // create new list of ingredients and update the ingredient there
@@ -64,9 +71,12 @@ export function shoppingListReducer(state = initialState, action: ShoppingListAc
 
             return {
                 ...state,
-                ingredients: oldIngredients
+                ingredients: oldIngredients,
+                editedIngredient: null,
+                editedIngredientIndex: -1
             };
 
+        // start edit mode
         case ShoppingListActions.START_EDIT:
 
             // create new list of ingredients and update the ingredient there
@@ -76,6 +86,15 @@ export function shoppingListReducer(state = initialState, action: ShoppingListAc
                 ...state,
                 editedIngredient: editedIngredient,
                 editedIngredientIndex: action.payload
+            };
+
+        // stop edit mode
+        case ShoppingListActions.STOP_EDIT:
+
+            return {
+                ...state,
+                editedIngredient: null,
+                editedIngredientIndex: -1
             };
 
         default:
