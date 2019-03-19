@@ -15,6 +15,8 @@ export class AuthInterceptor implements HttpInterceptor {
         console.log('Intercepted!', req);
         // const copiedReq = req.clone({headers: req.headers.set('', '')});
         return this.store.select('auth')
+            // bug fix, only take this value once
+            .take(1)
             // we use switchMap so no to wrap and oservable inside and observable
             .switchMap(
                 (authState: fromAuth.State) => {
