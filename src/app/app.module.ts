@@ -14,6 +14,7 @@ import { AuthModule } from './auth/auth.module';
 import { CoreModule } from './core/core.module';
 import { reducers } from './store/app.reducers';
 import { AuthEffects } from './auth/store/auth.effects';
+import { environment } from '@env/environment';
 
 @NgModule({
     declarations: [
@@ -30,7 +31,7 @@ import { AuthEffects } from './auth/store/auth.effects';
         StoreModule.forRoot(reducers),
         EffectsModule.forRoot([AuthEffects]),
         StoreRouterConnectingModule,
-        StoreDevtoolsModule.instrument()
+        !environment.production ? StoreDevtoolsModule.instrument() : []
     ],
     bootstrap: [AppComponent]
 })
