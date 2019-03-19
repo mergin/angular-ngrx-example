@@ -22,11 +22,9 @@
                     <a routerLink="/shopping-list">Shopping List</a>
                 </li>
             </ul>
-            {{(authState | async).authenticated}}
 
             <!-- right side -->
             <ul class="nav navbar-nav navbar-right">
-
 
                 <!-- register / login -->
                 <ng-template [ngIf]="!(authState | async).authenticated">
