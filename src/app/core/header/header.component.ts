@@ -3,10 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { DataStorageService } from '../../shared/data-storage.service';
-import * as fromApp from '../../store/app.reducers';
-import * as fromAuth from '../../auth/store/auth.reducers';
-import * as AuthActions from '../../auth/store/auth.actions';
+import { DataStorageService } from '@app/shared/data-storage.service';
+import * as fromApp from '@app/store/app.reducers';
+import * as fromAuth from '@app/auth/store/auth.reducers';
+import * as AuthActions from '@app/auth/store/auth.actions';
 
 @Component({
     selector: 'app-header',

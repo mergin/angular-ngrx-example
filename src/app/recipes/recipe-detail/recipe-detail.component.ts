@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
-import { Recipe } from '../recipe.model';
-import { RecipeService } from '../recipe.service';
-import * as ShoppingListActions from '../../shopping-list/store/shopping-list.actions';
-import * as fromApp from '../../store/app.reducers';
+import { Recipe } from '@app/recipes/recipe.model';
+import { RecipeService } from '@app/recipes/recipe.service';
+import * as ShoppingListActions from '@app/shopping-list/store/shopping-list.actions';
+import * as fromApp from '@app/store/app.reducers';
 
 @Component({
     selector: 'app-recipe-detail',

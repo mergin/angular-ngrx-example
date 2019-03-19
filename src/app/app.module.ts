@@ -3,6 +3,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -26,7 +28,9 @@ import { AuthEffects } from './auth/store/auth.effects';
         AuthModule,
         CoreModule,
         StoreModule.forRoot(reducers),
-        EffectsModule.forRoot([AuthEffects])
+        EffectsModule.forRoot([AuthEffects]),
+        StoreRouterConnectingModule,
+        StoreDevtoolsModule.instrument()
     ],
     bootstrap: [AppComponent]
 })
