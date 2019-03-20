@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
 import * as fromRecipe from '@app/recipes/store/recipe.reducers';
-import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-recipe-list',
